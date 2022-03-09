@@ -1,6 +1,5 @@
-#ifndef QUEUE_H
-#define QUEUE_H
-//pragma
+#pragma once
+
 class Queue
 {
 private:
@@ -30,6 +29,10 @@ public:
     friend Queue operator--(Queue &, int);
     friend Queue operator+(const Queue&, const Queue&);
     friend Queue operator/(const Queue&, const Queue&);
+    friend bool operator!=(const Queue&, const Queue&);
+    friend bool operator==(const Queue&, const Queue&);
+    friend bool operator>(const Queue&, const Queue&);
+    friend bool operator>=(const Queue&, const Queue&);
+    friend bool operator<(const Queue&, const Queue&);
+    friend bool operator<=(const Queue&, const Queue&);
 };
-
-#endif

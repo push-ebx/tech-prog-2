@@ -1,9 +1,6 @@
 #include <iostream>
-
-using namespace std;
-
 #include "Queue.h"
-//pragma
+using namespace std;
 
 Queue::Queue(int size) {
   queue = new int[size];
@@ -81,8 +78,43 @@ Queue operator--(Queue &q, int d) {
   return temp;
 }
 
+bool operator!=(const Queue &q1, const Queue &q2) {
+  if (q1.getSize() != q2.getSize() || q1.getCount() != q2.getCount()) {
+    return true;
+  }
+
+  for (int i = 0; i < q1.getCount(); ++i) {
+    if (q1.queue[i] != q2.queue[i])
+      return true;
+  }
+  return false;
+}
+
+bool operator==(const Queue &q1, const Queue &q2) {
+  return !(q1 != q2);
+}
+
+bool operator>(const Queue &q1, const Queue &q2) {
+  return q1.getCount() > q2.getCount();
+}
+
+bool operator>=(const Queue &q1, const Queue &q2) {
+  return q1.getCount() >= q2.getCount();
+}
+
+bool operator<(const Queue &q1, const Queue &q2) {
+  return q1.getCount() < q2.getCount();
+}
+
+bool operator<=(const Queue &q1, const Queue &q2) {
+  return q1.getCount() <= q2.getCount();
+}
+
 Queue &Queue::operator=(const Queue &q) {
-  Queue q2(q); //// чекать на самоприсваивание
+  if (this == &q) {
+    return *this;
+  }
+  Queue q2(q);
   return q2;
 }
 
@@ -108,8 +140,8 @@ Queue operator/(const Queue &q1, const Queue &q2) {
   return q3;
 }
 
-Queue& Queue::operator+=(const Queue &q2){
-  if (size != q2.getSize()) { //// и count
+Queue &Queue::operator+=(const Queue &q2) {
+  if (size != q2.getSize() || count != q2.getCount()) {
     throw new invalid_argument("Incorrect sizes");
   }
   for (int i = 0; i < count; ++i) {
@@ -118,8 +150,8 @@ Queue& Queue::operator+=(const Queue &q2){
   return *this;
 }
 
-Queue& Queue::operator/=(const Queue &q2){
-  if (size != q2.getSize()) { //// и count
+Queue &Queue::operator/=(const Queue &q2) {
+  if (size != q2.getSize() || count != q2.getCount()) {
     throw new invalid_argument("Incorrect sizes");
   }
   for (int i = 0; i < count; ++i) {
@@ -128,8 +160,8 @@ Queue& Queue::operator/=(const Queue &q2){
   return *this;
 }
 
-Queue& Queue::operator-=(const Queue &q2){
-  if (size != q2.getSize()) { //// и count
+Queue &Queue::operator-=(const Queue &q2) {
+  if (size != q2.getSize() || count != q2.getCount()) {
     throw new invalid_argument("Incorrect sizes");
   }
   for (int i = 0; i < count; ++i) {
