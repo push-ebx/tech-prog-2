@@ -40,7 +40,7 @@ std::istream &operator>>(std::istream &in, Queue &q) {
   return in;
 }
 
-void Queue::clear(){
+void Queue::clear() {
   end = 0;
   head = 0;
   count = 0;
@@ -127,8 +127,15 @@ Queue &Queue::operator=(const Queue &q) {
   if (this == &q) {
     return *this;
   }
-  Queue q2(q);
-  return q2;
+  queue = new Item[q.size];
+  size = q.size;
+  end = q.end;
+  head = q.head;
+  count = q.count;
+  for (int i = 0; i < q.size; ++i) {
+    queue[i].value = q.queue[i].value;
+  }
+  return *this;
 }
 
 int *getQueueOfArray(const Queue &q1) {
@@ -142,8 +149,7 @@ int *getQueueOfArray(const Queue &q1) {
       items[pos++] = q1.queue[i].value;
     for (int i = 0; i < q1.end; i++)
       items[pos++] = q1.queue[i].value;
-  }
-  else cout << "Queue is empty";
+  } else cout << "Queue is empty\n";
   return items;
 }
 
@@ -228,7 +234,7 @@ int Queue::getCount() const {
 
 int Queue::pop() {
   if (count <= 0) {
-    cout << "Queue is empty" << endl;
+    cout << "Queue is empty\n";
     return -1;
   }
   int item = queue[head].value;
