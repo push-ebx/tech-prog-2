@@ -8,9 +8,13 @@ Queue::Queue(int size) {
   this->size = size;
 }
 
+Queue::~Queue() {
+  delete[] queue;
+}
+
 Queue::Queue(const Queue &q) :
         queue(new Item[q.size]), size(q.size), end(q.end), head(q.head), count(q.count) {
-  for (int i = 0; i < q.count; ++i) {
+  for (int i = 0; i < q.size; ++i) {
     queue[i].value = q.queue[i].value;
   }
 }
@@ -30,7 +34,7 @@ std::ostream &operator<<(std::ostream &out, const Queue &q) {
 
 std::istream &operator>>(std::istream &in, Queue &q) {
   int item;
-  cout << "Enter item: ";
+  cout << "Enter item>>";
   in >> item;
   q.push(item);
   return in;
@@ -47,7 +51,6 @@ void Queue::push(int item) {
     cout << "Queue is full" << endl;
     return;
   }
-
   queue[end].value = item;
   end = (end + 1) % size;
   count++;
@@ -61,7 +64,7 @@ Queue &Queue::operator++() {
 Queue operator++(Queue &q, int d) {
   Queue temp(q.getSize());
   int add;
-  cout << "Enter adder: ";
+  cout << "Enter adder>>";
   cin >> add;
 
   for (int i = 0; i < q.getCount(); ++i) {
@@ -75,7 +78,7 @@ Queue operator++(Queue &q, int d) {
 Queue operator--(Queue &q, int d) {
   Queue temp(q.getSize());
   int sub;
-  cout << "Enter subtrahend: ";
+  cout << "Enter subtrahend>>";
   cin >> sub;
 
   for (int i = 0; i < q.getCount(); ++i) {
@@ -140,12 +143,14 @@ int *getQueueOfArray(const Queue &q1) {
     for (int i = 0; i < q1.end; i++)
       items[pos++] = q1.queue[i].value;
   }
+  else cout << "Queue is empty";
   return items;
 }
 
 Queue operator+(const Queue &q1, const Queue &q2) {
-  if (q1.getSize() != q2.getSize()) {
-    throw new invalid_argument("Incorrect sizes");
+  if (q1.getSize() != q2.getSize() || q1.getCount() != q2.getCount()) {
+    cout << "Incorrect sizes or count items" << endl;
+    throw new invalid_argument("Incorrect sizes or count items");
   }
   Queue q3(q1.getSize());
   int *items1 = getQueueOfArray(q1);
@@ -158,8 +163,9 @@ Queue operator+(const Queue &q1, const Queue &q2) {
 }
 
 Queue operator/(const Queue &q1, const Queue &q2) {
-  if (q1.getSize() != q2.getSize()) {
-    throw new invalid_argument("Incorrect sizes");
+  if (q1.getSize() != q2.getSize() || q1.getCount() != q2.getCount()) {
+    cout << "Incorrect sizes or count items" << endl;
+    throw new invalid_argument("Incorrect sizes or count items");
   }
   Queue q3(q1.getSize());
   int *items1 = getQueueOfArray(q1);
@@ -173,7 +179,8 @@ Queue operator/(const Queue &q1, const Queue &q2) {
 
 Queue &Queue::operator+=(const Queue &q2) {
   if (size != q2.getSize() || count != q2.getCount()) {
-    throw new invalid_argument("Incorrect sizes");
+    cout << "Incorrect sizes or count items" << endl;
+    throw new invalid_argument("Incorrect sizes or count items");
   }
   int *items1 = getQueueOfArray(*this);
   int *items2 = getQueueOfArray(q2);
@@ -187,7 +194,8 @@ Queue &Queue::operator+=(const Queue &q2) {
 
 Queue &Queue::operator/=(const Queue &q2) {
   if (size != q2.getSize() || count != q2.getCount()) {
-    throw new invalid_argument("Incorrect sizes");
+    cout << "Incorrect sizes or count items" << endl;
+    throw new invalid_argument("Incorrect sizes or count items");
   }
   int *items1 = getQueueOfArray(*this);
   int *items2 = getQueueOfArray(q2);
@@ -201,7 +209,8 @@ Queue &Queue::operator/=(const Queue &q2) {
 
 Queue &Queue::operator-=(const Queue &q2) {
   if (size != q2.getSize() || count != q2.getCount()) {
-    throw new invalid_argument("Incorrect sizes");
+    cout << "Incorrect sizes or count items" << endl;
+    throw new invalid_argument("Incorrect sizes or count items");
   }
   int *items1 = getQueueOfArray(*this);
   int *items2 = getQueueOfArray(q2);
