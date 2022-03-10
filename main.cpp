@@ -34,8 +34,7 @@ int main() {
         cout << "Select queue (1-3)>>" << endl;
         cin >> num_q;
       } else if (act == COMPARE) {
-        cout
-                << "Select comparison:\n\t1 - \"!=\"\n\t2 - \"==\"\n\t3 - \">\"\n\t4 - \"<\"\n\t5 - \">=\"\n\t6 - \"<=\" >>";
+        cout << "Select comparison:\n\t1 - \"!=\"\n\t2 - \"==\"\n\t3 - \">\"\n\t4 - \"<\"\n\t5 - \">=\"\n\t6 - \"<=\" >>";
         cin >> move;
         cout << "What queue compare (1-3)? >>";
         cin >> num_q2;
