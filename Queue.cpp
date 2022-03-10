@@ -31,9 +31,7 @@ int Queue::pop() {
 }
 
 void Queue::clear() {
-  end = 0;
-  head = 0;
-  count = 0;
+  end = head = count = 0;
 }
 
 void Queue::push(int item) {

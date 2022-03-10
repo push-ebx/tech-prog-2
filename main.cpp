@@ -22,32 +22,33 @@ int main() {
     show_menu();
     try {
       if (act == PUSH)
-        ++queues[num_q - 1];
+        ++queues[num_q];
       else if (act == POP)
-        --queues[num_q - 1];
+        --queues[num_q];
       else if (act == CLEAR) {
-        queues[num_q - 1].clear();
+        queues[num_q].clear();
         cout << "The queue successfully cleared";
       } else if (act == PRINT)
-        cout << queues[num_q - 1];
+        cout << queues[num_q];
       else if (act == SELECT) {
         cout << "Select queue (1-3)>>" << endl;
         cin >> num_q;
+        num_q--;
       } else if (act == COMPARE) {
         cout << "Select comparison:\n\t1 - \"!=\"\n\t2 - \"==\"\n\t3 - \">\"\n\t4 - \"<\"\n\t5 - \">=\"\n\t6 - \"<=\" >>";
         cin >> move;
         cout << "What queue compare (1-3)? >>";
         cin >> num_q2;
-        if (move == 1) cout << ((queues[num_q - 1] != queues[num_q2 - 1]) ? "true\n" : "false\n");
-        else if (move == 2) cout << ((queues[num_q - 1] == queues[num_q2 - 1]) ? "true\n" : "false\n");
-        else if (move == 3) cout << ((queues[num_q - 1] > queues[num_q2 - 1]) ? "true\n" : "false\n");
-        else if (move == 4) cout << ((queues[num_q - 1] < queues[num_q2 - 1]) ? "true\n" : "false\n");
-        else if (move == 5) cout << ((queues[num_q - 1] >= queues[num_q2 - 1]) ? "true\n" : "false\n");
-        else if (move == 6) cout << ((queues[num_q - 1] <= queues[num_q2 - 1]) ? "true\n" : "false\n");
+        if (move == 1) cout << ((queues[num_q] != queues[num_q2]) ? "true\n" : "false\n");
+        else if (move == 2) cout << ((queues[num_q] == queues[num_q2]) ? "true\n" : "false\n");
+        else if (move == 3) cout << ((queues[num_q] > queues[num_q2]) ? "true\n" : "false\n");
+        else if (move == 4) cout << ((queues[num_q] < queues[num_q2]) ? "true\n" : "false\n");
+        else if (move == 5) cout << ((queues[num_q] >= queues[num_q2]) ? "true\n" : "false\n");
+        else if (move == 6) cout << ((queues[num_q] <= queues[num_q2]) ? "true\n" : "false\n");
       } else if (act == ADD)
-        queues[num_q - 1]++;
+        queues[num_q]++;
       else if (act == SUB)
-        queues[num_q - 1]--;
+        queues[num_q]--;
       else if (act == ADD_DIV) {
         cout << "Select move:\n\t1 - \"+\"\n\t2 - \"/\" >>";
         cin >> move;
@@ -55,12 +56,12 @@ int main() {
         cin >> num_q2;
         cout << "Select result queue:";
         cin >> num_q3;
-        if (move == 1) queues[num_q3 - 1] = queues[num_q - 1] + queues[num_q2 - 1];
-        else if (move == 2) queues[num_q3 - 1] = queues[num_q - 1] / queues[num_q2 - 1];
+        if (move == 1) queues[num_q3] = queues[num_q] + queues[num_q2];
+        else if (move == 2) queues[num_q3] = queues[num_q] / queues[num_q2];
       } else if (act == COPY) {
         cout << "Select queue:";
         cin >> num_q2;
-        queues[num_q - 1] = queues[num_q2 - 1];
+        queues[num_q] = queues[num_q2];
       } else if (act == EXIT)
         is_exit = true;
     }
